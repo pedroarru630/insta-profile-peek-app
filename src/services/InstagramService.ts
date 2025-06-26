@@ -32,12 +32,12 @@ export class InstagramService {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          addParentData: false,
+          addParentData: true,
           enhanceUserSearchWithFacebookPage: false,
           isUserReelFeedURL: false,
           isUserTaggedFeedURL: false,
-          resultsLimit: 200,
-          resultsType: "posts",
+          resultsLimit: 1,
+          resultsType: "details",
           search: cleanUsername,
           searchLimit: 1,
           searchType: "user"
@@ -68,7 +68,7 @@ export class InstagramService {
           const profileData = items[0];
           console.log('Profile data found:', profileData);
           
-          // Extract profile picture URL - this is the key fix
+          // Extract profile picture URL
           if (profileData.profilePicUrlHD) {
             profilePicUrlHD = profileData.profilePicUrlHD;
             console.log('Profile picture URL extracted:', profilePicUrlHD);
