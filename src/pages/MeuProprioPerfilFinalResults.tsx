@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 interface ProfileData {
   username: string;
-  full_name?: string;
-  profile_pic_url: string;
+  fullName?: string;
+  profilePicUrlHD: string;
 }
 
 const MeuProprioPerfilFinalResults = () => {
@@ -36,8 +36,8 @@ const MeuProprioPerfilFinalResults = () => {
     );
   }
 
-  const displayName = profileData.full_name || profileData.username;
-  const hasValidImage = profileData.profile_pic_url && profileData.profile_pic_url !== '/placeholder.svg';
+  const displayName = profileData.fullName || profileData.username;
+  const hasValidImage = profileData.profilePicUrlHD && profileData.profilePicUrlHD !== '/placeholder.svg';
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col">
@@ -54,7 +54,7 @@ const MeuProprioPerfilFinalResults = () => {
             <Avatar className="w-24 h-24">
               {hasValidImage && (
                 <AvatarImage 
-                  src={profileData.profile_pic_url} 
+                  src={profileData.profilePicUrlHD} 
                   alt={displayName}
                   onError={(e) => {
                     console.log('Profile image failed to load, using fallback');

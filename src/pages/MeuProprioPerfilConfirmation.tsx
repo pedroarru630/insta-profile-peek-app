@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 interface ProfileData {
   username: string;
-  full_name?: string;
-  profile_pic_url: string;
+  fullName?: string;
+  profilePicUrlHD: string;
 }
 
 const MeuProprioPerfilConfirmation = () => {
@@ -44,8 +44,8 @@ const MeuProprioPerfilConfirmation = () => {
     );
   }
 
-  const displayName = profileData.full_name || profileData.username;
-  const isPlaceholder = profileData.profile_pic_url === '/placeholder.svg';
+  const displayName = profileData.fullName || profileData.username;
+  const hasValidProfilePic = profileData.profilePicUrlHD && profileData.profilePicUrlHD !== '/placeholder.svg';
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col">
@@ -60,9 +60,9 @@ const MeuProprioPerfilConfirmation = () => {
           {/* Profile picture */}
           <div className="flex justify-center mb-6">
             <Avatar className="w-24 h-24">
-              {!isPlaceholder && (
+              {hasValidProfilePic && (
                 <AvatarImage 
-                  src={profileData.profile_pic_url} 
+                  src={profileData.profilePicUrlHD} 
                   alt={displayName}
                   onError={(e) => {
                     console.log('Profile image failed to load, using fallback');

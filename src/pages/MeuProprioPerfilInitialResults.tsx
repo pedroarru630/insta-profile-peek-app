@@ -1,3 +1,4 @@
+
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Check } from "lucide-react";
@@ -7,8 +8,8 @@ import { useEffect, useState } from "react";
 
 interface ProfileData {
   username: string;
-  full_name?: string;
-  profile_pic_url: string;
+  fullName?: string;
+  profilePicUrlHD: string;
 }
 
 const MeuProprioPerfilInitialResults = () => {
@@ -39,11 +40,11 @@ const MeuProprioPerfilInitialResults = () => {
     );
   }
 
-  const displayName = profileData.full_name || profileData.username;
-  const hasValidProfilePic = profileData.profile_pic_url && profileData.profile_pic_url !== '/placeholder.svg';
+  const displayName = profileData.fullName || profileData.username;
+  const hasValidProfilePic = profileData.profilePicUrlHD && profileData.profilePicUrlHD !== '/placeholder.svg';
 
   console.log('MeuProprioPerfilInitialResults - hasValidProfilePic:', hasValidProfilePic);
-  console.log('MeuProprioPerfilInitialResults - profile_pic_url:', profileData.profile_pic_url);
+  console.log('MeuProprioPerfilInitialResults - profilePicUrlHD:', profileData.profilePicUrlHD);
 
   const findings = [
     `Foram encontradas 9 menções a @${profileData.username} em mensagens no direct`,
@@ -68,7 +69,7 @@ const MeuProprioPerfilInitialResults = () => {
             <Avatar className="w-24 h-24">
               {hasValidProfilePic ? (
                 <AvatarImage 
-                  src={profileData.profile_pic_url} 
+                  src={profileData.profilePicUrlHD} 
                   alt={displayName}
                   onError={(e) => {
                     console.log('Profile image failed to load, using fallback');

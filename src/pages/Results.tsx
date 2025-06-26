@@ -1,3 +1,4 @@
+
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Check } from "lucide-react";
@@ -7,8 +8,8 @@ import { useEffect, useState } from "react";
 
 interface ProfileData {
   username: string;
-  full_name?: string;
-  profile_pic_url: string;
+  fullName?: string;
+  profilePicUrlHD: string;
   exists: boolean;
 }
 
@@ -25,14 +26,6 @@ const Results = () => {
     }
   }, []);
 
-  const findings = [
-    `3 conversas com chamada de vídeo foram excluídas no direct de ${profileData?.username || 'usuário'}`,
-    "A inteligência artificial conseguiu resgatar prints de conversas com cunho sexual",
-    "11 novos stalker's foram identificados na última semana",
-    `${profileData?.username || 'usuário'} tem um fã! Um super stalker está visitando seu perfil por 11 dias consecutivos`,
-    `3 perfis que não seguem ${profileData?.username || 'usuário'} adicionaram nos melhores amigos`
-  ];
-
   const handleViewFullReport = () => {
     navigate('/final-results');
   };
@@ -45,11 +38,19 @@ const Results = () => {
     );
   }
 
-  const displayName = profileData.full_name || profileData.username;
-  const hasValidProfilePic = profileData.profile_pic_url && profileData.profile_pic_url !== '/placeholder.svg';
+  const displayName = profileData.fullName || profileData.username;
+  const hasValidProfilePic = profileData.profilePicUrlHD && profileData.profilePicUrlHD !== '/placeholder.svg';
+
+  const findings = [
+    `3 conversas com chamada de vídeo foram excluídas no direct de ${profileData.username}`,
+    "A inteligência artificial conseguiu resgatar prints de conversas com cunho sexual",
+    "11 novos stalker's foram identificados na última semana",
+    `${profileData.username} tem um fã! Um super stalker está visitando seu perfil por 11 dias consecutivos`,
+    `3 perfis que não seguem ${profileData.username} adicionaram nos melhores amigos`
+  ];
 
   console.log('Results page - hasValidProfilePic:', hasValidProfilePic);
-  console.log('Results page - profile_pic_url:', profileData.profile_pic_url);
+  console.log('Results page - profilePicUrlHD:', profileData.profilePicUrlHD);
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col">
@@ -66,7 +67,7 @@ const Results = () => {
             <Avatar className="w-24 h-24">
               {hasValidProfilePic ? (
                 <AvatarImage 
-                  src={profileData.profile_pic_url}
+                  src={profileData.profilePicUrlHD}
                   alt={displayName}
                   onError={(e) => {
                     console.log('Profile image failed to load, using fallback');

@@ -1,8 +1,8 @@
 
 interface InstagramProfile {
   username: string;
-  full_name?: string;
-  profile_pic_url: string;
+  fullName?: string;
+  profilePicUrlHD: string;
   exists: boolean;
 }
 
@@ -61,7 +61,7 @@ export class InstagramService {
         
         // Check if we also have detailed profile data with profile picture
         const items = responseJson.data?.items || [];
-        let profilePicUrl = '/placeholder.svg';
+        let profilePicUrlHD = '/placeholder.svg';
         let fullName = urlUsername;
         
         if (items.length > 0) {
@@ -70,8 +70,8 @@ export class InstagramService {
           
           // Extract profile picture URL - this is the key fix
           if (profileData.profilePicUrlHD) {
-            profilePicUrl = profileData.profilePicUrlHD;
-            console.log('Profile picture URL extracted:', profilePicUrl);
+            profilePicUrlHD = profileData.profilePicUrlHD;
+            console.log('Profile picture URL extracted:', profilePicUrlHD);
           }
           
           if (profileData.fullName) {
@@ -81,8 +81,8 @@ export class InstagramService {
         
         const finalProfile = {
           username: urlUsername,
-          full_name: fullName,
-          profile_pic_url: profilePicUrl,
+          fullName: fullName,
+          profilePicUrlHD: profilePicUrlHD,
           exists: true
         };
         
@@ -98,8 +98,8 @@ export class InstagramService {
         
         return {
           username: profileData.username || cleanUsername,
-          full_name: profileData.fullName,
-          profile_pic_url: profileData.profilePicUrlHD || '/placeholder.svg',
+          fullName: profileData.fullName,
+          profilePicUrlHD: profileData.profilePicUrlHD || '/placeholder.svg',
           exists: true
         };
       }
@@ -107,8 +107,8 @@ export class InstagramService {
       console.log('No profile data returned from API');
       return {
         username: cleanUsername,
-        full_name: undefined,
-        profile_pic_url: '/placeholder.svg',
+        fullName: undefined,
+        profilePicUrlHD: '/placeholder.svg',
         exists: false
       };
       
@@ -116,8 +116,8 @@ export class InstagramService {
       console.error('Error fetching Instagram profile:', error);
       return {
         username: username.replace('@', ''),
-        full_name: undefined,
-        profile_pic_url: '/placeholder.svg',
+        fullName: undefined,
+        profilePicUrlHD: '/placeholder.svg',
         exists: false
       };
     }

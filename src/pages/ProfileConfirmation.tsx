@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 
 interface ProfileData {
   username: string;
-  full_name?: string;
-  profile_pic_url: string;
+  fullName?: string;
+  profilePicUrlHD: string;
   exists: boolean;
 }
 
@@ -47,11 +47,11 @@ const ProfileConfirmation = () => {
     );
   }
 
-  const displayName = profileData.full_name || profileData.username;
-  const hasValidProfilePic = profileData.profile_pic_url && profileData.profile_pic_url !== '/placeholder.svg';
+  const displayName = profileData.fullName || profileData.username;
+  const hasValidProfilePic = profileData.profilePicUrlHD && profileData.profilePicUrlHD !== '/placeholder.svg';
 
   console.log('Profile confirmation - hasValidProfilePic:', hasValidProfilePic);
-  console.log('Profile confirmation - profile_pic_url:', profileData.profile_pic_url);
+  console.log('Profile confirmation - profilePicUrlHD:', profileData.profilePicUrlHD);
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col">
@@ -68,7 +68,7 @@ const ProfileConfirmation = () => {
             <Avatar className="w-24 h-24">
               {hasValidProfilePic ? (
                 <AvatarImage 
-                  src={profileData.profile_pic_url}
+                  src={profileData.profilePicUrlHD}
                   alt={displayName}
                   onError={(e) => {
                     console.log('Profile image failed to load, using fallback');
